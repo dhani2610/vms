@@ -1,0 +1,67 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+
+Route::get('/', 'HomeController@redirectAdmin')->name('index');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin/register', 'BerandaController@register')->name('admin-register');
+Route::post('/admin/register/store', 'BerandaController@registerStore')->name('admin-register-store');
+
+/**
+ * Admin routes
+ */
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
+    Route::resource('roles', 'Backend\RolesController', ['names' => 'admin.roles']);
+    Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
+    Route::resource('admins', 'Backend\AdminsController', ['names' => 'admin.admins']);
+
+    Route::post('/update-verifikasi/{id}', 'Backend\AdminsController@updateVerifikasi')->name('admins.update-verifikasi');
+
+    Route::group(['prefix' => 'pengadaan'], function () {
+        Route::get('/list', 'Backend\PengadaanController@list')->name('list.pengadaan');
+        Route::get('/join-pengadaan/{id}/{vendor}', 'Backend\PengadaanController@join')->name('join.pengadaan');
+        
+        Route::get('/', 'Backend\PengadaanController@index')->name('pengadaan');
+        Route::get('send-reminder/{id}', 'Backend\PengadaanController@sendEmail')->name('pengadaan.mail.reminder');
+        Route::get('create', 'Backend\PengadaanController@create')->name('pengadaan.create');
+        Route::post('store', 'Backend\PengadaanController@store')->name('pengadaan.store');
+        Route::get('edit/{id}', 'Backend\PengadaanController@edit')->name('pengadaan.edit');
+        Route::post('update/{id}', 'Backend\PengadaanController@update')->name('pengadaan.update');
+        Route::get('destroy/{id}', 'Backend\PengadaanController@destroy')->name('pengadaan.destroy');
+    });
+
+    Route::group(['prefix' => 'vendor'], function () {
+        Route::get('/', 'Backend\AdminsController@vendor')->name('vendor');
+    });
+
+
+    // Login Routes
+    Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');
+    Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('admin.login.submit');
+
+    // Logout Routes
+    Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('admin.logout.submit');
+
+    // Forget Password Routes
+    Route::get('/password/reset', 'Backend\Auth\ForgetPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('/password/reset/submit', 'Backend\Auth\ForgetPasswordController@reset')->name('admin.password.update');
+});
