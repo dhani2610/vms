@@ -178,6 +178,17 @@ class AdminsController extends Controller
         session()->flash('success', 'Status berhasil diupdate.');
         return back();
     }
+    public function resetPassword(Request $request, int $id)
+    {
+        $admin = Admin::find($id);
+        if ($request->password) {
+            $admin->password = Hash::make($request->password);
+        }
+        $admin->save();
+
+        session()->flash('success', 'Password berhasil direset.');
+        return back();
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -107,6 +107,10 @@
                                                                                 value="{{ $admin->company_name }}" name="company_name" placeholder="ex: Elnusa" required>
                                                                         </div>
                             
+                                                                        <div class="mb-3">
+                                                                            <label for="companyName" class="form-label">Informasi Barang/Jasa*</label>
+                                                                            <textarea name="info_barang_jasa" class="form-control" id="" required readonly>{{ $admin->info_barang_jasa }}</textarea>
+                                                                        </div>
                                                                     </div>
                             
                                                                     <!-- Informasi Kontak Perusahaan -->
@@ -194,6 +198,16 @@
                                                                             <input readonly type="email" class="form-control" id="picEmail"
                                                                                 value="{{ $admin->email }}" name="email" placeholder="ex: user@company.com" required>
                                                                         </div>
+
+                                                                        <form action="{{ route('admins.reset-password', $admin->id) }}" method="POST">
+                                                                            @csrf
+                                                                            <div class="mb-3">
+                                                                                <label for="picEmail" class="form-label">Reset Password</label>
+                                                                                <input type="password" class="form-control" id="picEmail"
+                                                                                    value="" name="password" placeholder="" required>
+                                                                            </div>
+                                                                            <button class="btn btn-primary mt-2" style="float: right" type="submit">Reset Password</button>
+                                                                        </form>
                             
                                                                     </div>
                                                                 </div>

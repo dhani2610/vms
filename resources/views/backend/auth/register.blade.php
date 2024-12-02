@@ -101,6 +101,10 @@
                                                 <input type="text" class="form-control" id="companyName"
                                                     name="company_name" placeholder="ex: Elnusa" required>
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="companyName" class="form-label">Informasi Barang/Jasa*</label>
+                                                <textarea name="info_barang_jasa" class="form-control" id="" required></textarea>
+                                            </div>
 
                                         </div>
 

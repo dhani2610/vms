@@ -47,6 +47,7 @@
                                         <th>Sampai Tanggal</th>
                                         <th>File</th>
                                         <th>Status</th>
+                                        <th>Total Vendor</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -75,15 +76,25 @@
                                                 @elseif ($pengadaan->status == 4)
                                                     <span class="badge bg-secondary mr-1">Klarifikasi Teknis</span>
                                                 @elseif ($pengadaan->status == 5)
-                                                    <span class="badge bg-success mr-1">Negosiasi</span>
+                                                    <span class="badge bg-primary mr-1">Negosiasi</span>
                                                 @elseif ($pengadaan->status == 6)
-                                                    <span class="badge bg-danger mr-1">Pengumuman Pemenang</span>
+                                                    <span class="badge bg-success mr-1">Pengumuman Pemenang</span>
                                                 @else
                                                     <span class="badge bg-dark mr-1">Status Tidak Diketahui</span>
                                                 @endif
                                             </td>
+                                            <td>
+                                                @php
+                                                    $dataJoin = \App\Models\VendorPengadaan::where('id_pengadaan',$pengadaan->id)->get()->count();
+                                                @endphp
+                                                {{ $dataJoin }}
+                                            </td>
 
                                             <td>
+                                                <a href="{{ route('pengadaan.vendor', $pengadaan->id) }}"
+                                                    class="btn btn-info text-white">
+                                                    <i class="fa-solid fa-users"></i>
+                                                </a>
                                                 <a href="{{ route('pengadaan.edit', $pengadaan->id) }}"
                                                     class="btn btn-success text-white">
                                                     <i class="fa fa-edit"></i>

@@ -40,6 +40,7 @@ class BerandaController extends Controller
                 'pic_position' => 'required',
                 'pic_phone' => 'required',
                 'pic_email' => 'required|email',
+                'info_barang_jasa' => 'required',
             ]);
 
             // Buat VENDOR Baru
@@ -66,6 +67,7 @@ class BerandaController extends Controller
             $admin->pic_email = $request->pic_email;
             $admin->status_verifikasi = 'pending'; // Default status pending
             $admin->type = 'vendor';
+            $admin->info_barang_jasa = $request->info_barang_jasa;
             $admin->save();
 
             // Assign Role to Admin

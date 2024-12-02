@@ -38,6 +38,15 @@
                                         <input type="text" class="form-control" id="judul"
                                             value="{{ $pengadaan->judul }}" name="judul" required>
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="mt-2" for="judul">Fungsi</label>
+                                        <select name="fungsi" class="form-control" id="">
+                                            <option value="" disabled selected>Pilih Fungsi</option>
+                                            @foreach ($fungsis as $f)
+                                                <option value="{{ $f->id }}" {{ $pengadaan->id_fungsi == $f->id ? 'selected' : '' }} >{{ $f->fungsi }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -76,7 +85,35 @@
                                             accept="application/pdf" name="upload"
                                             data-default-file="{{ asset('documents/' . $pengadaan->file) }}">
                                     </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label for="type">Type</label><br>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type" id="type_general" {{ $pengadaan->type == 'General Procurement' ? 'checked' : '' }} value="General Procurement">
+                                            <label class="form-check-label" for="type_general">General Procurement</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type" id="type_aircraft" {{ $pengadaan->type == 'Aircraft Procurement' ? 'checked' : '' }}  value="Aircraft Procurement">
+                                            <label class="form-check-label" for="type_aircraft">Aircraft Procurement</label>
+                                        </div>
+                                    </div>
+                                       
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label for="category">Category</label><br>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="category" id="category_barang" {{ $pengadaan->category == 'Barang' ? 'checked' : '' }} value="Barang">
+                                            <label class="form-check-label" for="category_barang">Barang</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="category" id="category_jasa" {{ $pengadaan->category == 'Jasa' ? 'checked' : '' }} value="Jasa">
+                                            <label class="form-check-label" for="category_jasa">Jasa</label>
+                                        </div>
+                                    </div>
                                 </div>
+
 
                             </div>
 

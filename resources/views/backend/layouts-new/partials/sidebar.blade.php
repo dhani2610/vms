@@ -55,8 +55,14 @@
         @if (Auth::guard('admin')->user()->type == 'vendor' && Auth::guard('admin')->user()->status_verifikasi == 'approve')
             <li class="menu-item mb-2">
                 <a href="{{ route('list.pengadaan') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <i class='menu-icon bx bxs-package' ></i>
                     <div data-i18n="Pengadaan">Pengadaan</div>
+                </a>
+            </li>
+            <li class="menu-item mb-2">
+                <a href="{{ route('pengumuman.pengadaan') }}" class="menu-link">
+                    <i class='menu-icon bx bx-notepad'></i>
+                    <div data-i18n="Pengumuman">Pengumuman</div>
                 </a>
             </li>
         @endif
@@ -88,6 +94,13 @@
                         <a href="{{ route('admin.admins.index') }}" class="menu-link">
                             <div data-i18n="Without menu"
                                 style="color : {{ Request::routeIs('admin/admins') ? '#3da601' : '' }}">Users
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::routeIs('fungsi') ? 'active' : '' }}">
+                        <a href="{{ route('fungsi') }}" class="menu-link">
+                            <div data-i18n="Without menu"
+                                style="color : {{ Request::routeIs('fungsi') ? '#3da601' : '' }}">Fungsi
                             </div>
                         </a>
                     </li>

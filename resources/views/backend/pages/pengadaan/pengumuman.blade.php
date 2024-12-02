@@ -120,16 +120,6 @@
             font-size: 11px;
             display: none;
         }
-        .tag-featured {
-            padding: 7px 10px;
-            background-color: black;
-            color: white;
-            border-radius: 20px;
-            margin-left: 10px;
-            text-transform: uppercase;
-            font-size: 11px;
-            display: none;
-        }
 
         .job-card__info h6 {
             color: #323838;
@@ -311,7 +301,7 @@
                         <div class="col-12">
                             <div class="filter-tags-c">
                                 <ul id="filter-tags-list"></ul>
-                                <p class="clear-tags" id="js-clear-tags"> Daftar Pengadaan</p>
+                                <p class="clear-tags" id="js-clear-tags"> Pengumuman Pengadaan</p>
                             </div>
                         </div>
                     </div>
@@ -334,6 +324,15 @@
 
                                         $isNew = $createdAt->diffInDays(now()) <= 1;
 
+                                    @endphp
+
+                                    @php
+                                        $dataJoin = \App\Models\VendorPengadaan::where(
+                                            'id_vendor',
+                                            Auth::guard('admin')->user()->id,
+                                        )
+                                            ->where('id_pengadaan', $pengadaan->id)
+                                            ->first();
                                     @endphp
 
 
@@ -381,6 +380,17 @@
                                         @else
                                             <li class="">Status Tidak Diketahui</li>
                                         @endif
+
+                                        @if ($dataJoin->status == 1)
+                                            <li>Pending</li>
+                                        @elseif ($dataJoin->status == 2)
+                                            <li>Approve</li>
+                                        @elseif ($dataJoin->status == 3)
+                                            <li>Not Approve</li>
+                                        @elseif ($dataJoin->status == 4)
+                                            <li>Pemenang</li>
+                                        @endif
+
                                     </ul>
                                 </li>
 
@@ -391,8 +401,16 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="tanderLabel">{{ $pengadaan->judul }}</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+
+                                                @if ($dataJoin->status == 1)
+                                                    <span class="badge bg-warning mr-1">Status Pengadaan : Pending</span>
+                                                @elseif ($dataJoin->status == 2)
+                                                    <span class="badge bg-primary mr-1">Status Pengadaan : Approve</span>
+                                                @elseif ($dataJoin->status == 3)
+                                                    <span class="badge bg-danger mr-1">Status Pengadaan : Not Approve</span>
+                                                @elseif ($dataJoin->status == 4)
+                                                    <span class="badge bg-success mr-1">Status Pengadaan : Pemenang</span>
+                                                @endif
                                             </div>
                                             <div class="modal-body">
                                                 <div class="row">
@@ -406,6 +424,7 @@
                                                             <br>
                                                             <span>{{ $pengadaan->judul }}</span>
                                                         </div>
+
                                                         <div class="form-group col-md-12">
                                                             <label class="mt-2" for="judul">
                                                                 <b>
@@ -462,31 +481,20 @@
                                                             @elseif ($pengadaan->status == 3)
                                                                 <span class="badge bg-warning mr-1">Penawaran Harga</span>
                                                             @elseif ($pengadaan->status == 4)
-                                                                <span class="badge bg-secondary mr-1">Klarifikasi
-                                                                    Teknis</span>
+                                                                <span class="badge bg-secondary mr-1">Klarifikasi Teknis</span>
                                                             @elseif ($pengadaan->status == 5)
-                                                                <span class="badge bg-success mr-1">Negosiasi</span>
+                                                                <span class="badge bg-primary mr-1">Negosiasi</span>
                                                             @elseif ($pengadaan->status == 6)
-                                                                <span class="badge bg-danger mr-1">Pengumuman
-                                                                    Pemenang</span>
+                                                                <span class="badge bg-success mr-1">Pengumuman Pemenang</span>
                                                             @else
-                                                                <span class="badge bg-dark mr-1">Status Tidak
-                                                                    Diketahui</span>
+                                                                <span class="badge bg-dark mr-1">Status Tidak Diketahui</span>
                                                             @endif
                                                         </div>
 
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        @php
-                                                            $join = \App\Models\VendorPengadaan::where('id_pengadaan',$pengadaan->id)->where('id_vendor',Auth::guard('admin')->user()->id)->first();
-                                                        @endphp
-                                                        @if ($join == null)
-                                                            <div class="form-group col-md-12 mt-2">
-                                                                    <a href="{{ route('join.pengadaan',['id' => $pengadaan->id , 'vendor' => Auth::guard('admin')->user()->id ]) }}"
-                                                                        class="btn btn-info" >+ Ikuti Pengadaan</a>
-                                                            </div>
-                                                        <hr>
-                                                        @endif
+
+
 
                                                         <div class="form-group col-md-12">
                                                             <label class="mt-2" for="dari_tanggal">
@@ -501,7 +509,7 @@
                                                                 -
                                                             @endif
                                                         </div>
-                                                       
+
                                                     </div>
 
                                                 </div>
