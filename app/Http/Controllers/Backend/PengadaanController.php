@@ -108,7 +108,7 @@ class PengadaanController extends Controller
         }
     }
 
-    public function sendEmail($id,$pengadaan)
+    public function sendEmail(Request $request,$id,$pengadaan)
     {
         try {
 
@@ -133,7 +133,9 @@ class PengadaanController extends Controller
                 'pengadaan' => $data,
             ]));
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            if ($request->check != null) {
+                dd($th->getMessage());
+            }
         }
     }
 
