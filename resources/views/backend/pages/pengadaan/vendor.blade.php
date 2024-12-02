@@ -345,12 +345,12 @@
                                                     @if ($isNew)
                                                         <p class="tag-new">New!</p>
                                                     @endif
-                                                    @if ($pengadaan->type != null)
+                                                    {{-- @if ($pengadaan->type != null)
                                                         <p class="tag-new">{{ $pengadaan->type }}</p>
                                                     @endif
                                                     @if ($pengadaan->category != null)
                                                         <p class="tag-new">{{ $pengadaan->category }}</p>
-                                                    @endif
+                                                    @endif --}}
                                                 </div>
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#tander{{ $pengadaan->id }}">
@@ -406,7 +406,7 @@
                                                             <br>
                                                             <span>{{ $pengadaan->judul }}</span>
                                                         </div>
-                                                        <div class="form-group col-md-12">
+                                                        {{-- <div class="form-group col-md-12">
                                                             <label class="mt-2" for="judul">
                                                                 <b>
                                                                     Fungsi
@@ -422,7 +422,7 @@
                                                             <span>-</span>
 
                                                             @endif
-                                                        </div>
+                                                        </div> --}}
 
                                                         <div class="row">
                                                             <div class="col-lg-6">

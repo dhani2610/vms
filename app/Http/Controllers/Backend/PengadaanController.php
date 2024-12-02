@@ -47,7 +47,7 @@ class PengadaanController extends Controller
     {
         $data['page_title'] = 'Pengumuman Pengadaan';
         $dataJoin = VendorPengadaan::where('id_vendor',Auth::guard('admin')->user()->id)->get()->pluck('id_pengadaan');
-        $data['pengadaans'] = Pengadaan::whereIn('id',$dataJoin)->orderBy('created_at', 'desc')->get();
+        $data['pengadaans'] = Pengadaan::whereIn('id',$dataJoin)->where('sampai_tanggal','>=',date('Y-m-d'))->orderBy('created_at', 'desc')->get();
 
         return view('backend.pages.pengadaan.pengumuman', $data);
     }
