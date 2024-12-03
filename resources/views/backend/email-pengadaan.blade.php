@@ -51,22 +51,22 @@
                                             
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
 
-                                                <strong>Nama Pengadaan:</strong> {{ $param['pengadaan']->judul }}
-                                                <strong>Dari Tanggal:</strong> {{ $param['pengadaan']->dari_tanggal }}
-                                                <strong>Sampai Tanggal:</strong> {{ $param['pengadaan']->sampai_tanggal }}
+                                                <strong>Nama Pengadaan:</strong> {{ $param['pengadaan']->judul }} <br>
+                                                <strong>Dari Tanggal:</strong> {{ $param['pengadaan']->dari_tanggal }}<br>
+                                                <strong>Sampai Tanggal:</strong> {{ $param['pengadaan']->sampai_tanggal }}<br>
                                                 <strong>Status Pengadaan:</strong> 
                                                     @if ($param['pengadaan']->status == 1)
-                                                        <span class="badge bg-info">Pengumuman</span>
+                                                        <span class="badge bg-info">Pengumuman</span><br>
                                                     @elseif ($param['pengadaan']->status == 2)
-                                                        <span class="badge bg-primary">Aanwijzing</span>
+                                                        <span class="badge bg-primary">Aanwijzing</span><br>
                                                     @elseif ($param['pengadaan']->status == 3)
-                                                        <span class="badge bg-warning">Penawaran Harga</span>
+                                                        <span class="badge bg-warning">Penawaran Harga</span><br>
                                                     @elseif ($param['pengadaan']->status == 4)
-                                                        <span class="badge bg-secondary">Klarifikasi Teknis</span>
+                                                        <span class="badge bg-secondary">Klarifikasi Teknis</span><br>
                                                     @elseif ($param['pengadaan']->status == 5)
-                                                        <span class="badge bg-success">Negosiasi</span>
+                                                        <span class="badge bg-success">Negosiasi</span><br>
                                                     @elseif ($param['pengadaan']->status == 6)
-                                                        <span class="badge bg-danger">Pengumuman Pemenang</span>
+                                                        <span class="badge bg-danger">Pengumuman Pemenang</span><br>
                                                     @endif
                                             </p>
                                             
