@@ -49,11 +49,12 @@
                                                 Kami informasikan bahwa terdapat pengadaan baru dengan rincian sebagai berikut:
                                             </p>
                                             
-                                            <ul style="color:#455056; font-size:15px;line-height:24px; margin:0; padding-left: 20px;">
-                                                <li><strong>Nama Pengadaan:</strong> {{ $param['pengadaan']->judul }}</li>
-                                                <li><strong>Dari Tanggal:</strong> {{ $param['pengadaan']->dari_tanggal }}</li>
-                                                <li><strong>Sampai Tanggal:</strong> {{ $param['pengadaan']->sampai_tanggal }}</li>
-                                                <li><strong>Status Pengadaan:</strong> 
+                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
+
+                                                <strong>Nama Pengadaan:</strong> {{ $param['pengadaan']->judul }}
+                                                <strong>Dari Tanggal:</strong> {{ $param['pengadaan']->dari_tanggal }}
+                                                <strong>Sampai Tanggal:</strong> {{ $param['pengadaan']->sampai_tanggal }}
+                                                <strong>Status Pengadaan:</strong> 
                                                     @if ($param['pengadaan']->status == 1)
                                                         <span class="badge bg-info">Pengumuman</span>
                                                     @elseif ($param['pengadaan']->status == 2)
@@ -67,8 +68,7 @@
                                                     @elseif ($param['pengadaan']->status == 6)
                                                         <span class="badge bg-danger">Pengumuman Pemenang</span>
                                                     @endif
-                                                </li>
-                                            </ul>
+                                            </p>
                                             
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
                                                 Mohon segera ditindaklanjuti sesuai dengan prosedur yang berlaku. Terima kasih atas perhatian dan kerja samanya.
