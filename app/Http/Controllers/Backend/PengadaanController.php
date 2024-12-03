@@ -152,11 +152,13 @@ class PengadaanController extends Controller
             // Kirim email pic
             Mail::to($email)->send(new NotificationNewPengadaanMail([
                 'email' => $email,
+                'vendor' => $data,
                 'pengadaan' => $data,
             ]));
             // Kirim email perusahaan
             Mail::to($email)->send(new NotificationNewPengadaanMail([
                 'email' => $company_email,
+                'vendor' => $data,
                 'pengadaan' => $data,
             ]));
             return response()->json(['failed' => false, 'msg' => 'berhasil!']);

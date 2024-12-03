@@ -37,16 +37,43 @@
                                     <td style="padding:0 35px;">
                                         <h1
                                             style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">
-                                            Reminder
+                                            Vendor Management System
                                         </h1>
                                         <span
                                             style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                        <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-
-                                            <b>
-                                                Safety Always
-                                            </b> 
-                                        </p>
+                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
+                                                Dengan hormat,
+                                            </p>
+                                            
+                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
+                                                Kami informasikan bahwa terdapat pengadaan baru dengan rincian sebagai berikut:
+                                            </p>
+                                            
+                                            <ul style="color:#455056; font-size:15px;line-height:24px; margin:0; padding-left: 20px;">
+                                                <li><strong>Nama Pengadaan:</strong> {{ $param['pengadaan']->judul }}</li>
+                                                <li><strong>Dari Tanggal:</strong> {{ $param['pengadaan']->dari_tanggal }}</li>
+                                                <li><strong>Sampai Tanggal:</strong> {{ $param['pengadaan']->sampai_tanggal }}</li>
+                                                <li><strong>Status Pengadaan:</strong> 
+                                                    @if ($param['pengadaan']->status == 1)
+                                                        <span class="badge bg-info">Pengumuman</span>
+                                                    @elseif ($param['pengadaan']->status == 2)
+                                                        <span class="badge bg-primary">Aanwijzing</span>
+                                                    @elseif ($param['pengadaan']->status == 3)
+                                                        <span class="badge bg-warning">Penawaran Harga</span>
+                                                    @elseif ($param['pengadaan']->status == 4)
+                                                        <span class="badge bg-secondary">Klarifikasi Teknis</span>
+                                                    @elseif ($param['pengadaan']->status == 5)
+                                                        <span class="badge bg-success">Negosiasi</span>
+                                                    @elseif ($param['pengadaan']->status == 6)
+                                                        <span class="badge bg-danger">Pengumuman Pemenang</span>
+                                                    @endif
+                                                </li>
+                                            </ul>
+                                            
+                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
+                                                Mohon segera ditindaklanjuti sesuai dengan prosedur yang berlaku. Terima kasih atas perhatian dan kerja samanya.
+                                            </p>
+                                            
                                     </td>
 
                                 </tr>
