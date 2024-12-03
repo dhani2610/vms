@@ -135,6 +135,37 @@ class PengadaanController extends Controller
         } catch (\Throwable $th) {
         }
     }
+    public function sendEmailTest($id,$pengadaan)
+    {
+        try {
+
+            $data = Pengadaan::find($pengadaan);
+
+            if (empty($data)) {
+                return response()->json(['failed' => true, 'msg' => 'data tidak tersedia!']);
+            }
+
+            $admin = Admin::find($id);
+            $email = $admin->email;
+            $company_email = $admin->company_email;
+
+            // Kirim email pic
+            Mail::to($email)->send(new NotificationNewPengadaanMail([
+                'email' => $email,
+                'pengadaan' => $data,
+            ]));
+            // Kirim email perusahaan
+            Mail::to($email)->send(new NotificationNewPengadaanMail([
+                'email' => $company_email,
+                'pengadaan' => $data,
+            ]));
+            return response()->json(['failed' => false, 'msg' => 'berhasil!']);
+
+        } catch (\Throwable $th) {
+            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+
+        }
+    }
 
     /**
      * Display the specified resource.

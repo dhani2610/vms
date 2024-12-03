@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
         
         Route::get('/', 'Backend\PengadaanController@index')->name('pengadaan');
         Route::get('send-email/{id}/{pengadaan}', 'Backend\PengadaanController@sendEmail')->name('pengadaan.mail');
+        Route::get('send-email-test/{id}/{pengadaan}', 'Backend\PengadaanController@sendEmailTest')->name('pengadaan.mail');
         Route::get('create', 'Backend\PengadaanController@create')->name('pengadaan.create');
         Route::post('store', 'Backend\PengadaanController@store')->name('pengadaan.store');
         Route::get('edit/{id}', 'Backend\PengadaanController@edit')->name('pengadaan.edit');
