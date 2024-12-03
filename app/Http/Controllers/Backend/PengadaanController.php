@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Pengadaan;
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationNewPengadaanMail;
+use App\Mail\NotificationPemenangPengadaanMail;
 use App\Models\Admin;
 use App\Models\Fungsi;
 use App\Models\VendorPengadaan;
@@ -125,14 +126,17 @@ class PengadaanController extends Controller
             // Kirim email pic
             Mail::to($email)->send(new NotificationNewPengadaanMail([
                 'email' => $email,
+                'vendor' => $data,
                 'pengadaan' => $data,
             ]));
-            // Kirim email perusahaan
-            Mail::to($email)->send(new NotificationNewPengadaanMail([
-                'email' => $company_email,
-                'pengadaan' => $data,
-            ]));
+            // // Kirim email perusahaan
+            // Mail::to($email)->send(new NotificationNewPengadaanMail([
+            //     'email' => $company_email,
+            //     'vendor' => $data,
+            //     'pengadaan' => $data,
+            // ]));
         } catch (\Throwable $th) {
+
         }
     }
     public function sendEmailTest($id,$pengadaan)
@@ -155,12 +159,12 @@ class PengadaanController extends Controller
                 'vendor' => $data,
                 'pengadaan' => $data,
             ]));
-            // Kirim email perusahaan
-            Mail::to($email)->send(new NotificationNewPengadaanMail([
-                'email' => $company_email,
-                'vendor' => $data,
-                'pengadaan' => $data,
-            ]));
+            // // Kirim email perusahaan
+            // Mail::to($email)->send(new NotificationNewPengadaanMail([
+            //     'email' => $company_email,
+            //     'vendor' => $data,
+            //     'pengadaan' => $data,
+            // ]));
             return response()->json(['failed' => false, 'msg' => 'berhasil!']);
 
         } catch (\Throwable $th) {
@@ -277,11 +281,47 @@ class PengadaanController extends Controller
             $data->status = $request->status;
             $data->save();
 
+            if ($data->status == 4) {
+                $this->sendEmailPemenang($data->id_vendor,$data->id_pengadaan);
+            }
+
+
             session()->flash('success', 'Berhasil update status verifikasi! ');
             return redirect()->back();
         } catch (\Throwable $th) {
             session()->flash('failed', $th->getMessage());
             return redirect()->back();
+        }
+    }
+
+    public function sendEmailPemenang($id,$pengadaan)
+    {
+        try {
+
+            $data = Pengadaan::find($pengadaan);
+
+            if (empty($data)) {
+                return response()->json(['failed' => true, 'msg' => 'data tidak tersedia!']);
+            }
+
+            $admin = Admin::find($id);
+            $email = $admin->email;
+            $company_email = $admin->company_email;
+
+            // Kirim email pic
+            Mail::to($email)->send(new NotificationPemenangPengadaanMail([
+                'email' => $email,
+                'vendor' => $data,
+                'pengadaan' => $data,
+            ]));
+            // // Kirim email perusahaan
+            // Mail::to($email)->send(new NotificationPemenangPengadaanMail([
+            //     'email' => $company_email,
+            //     'vendor' => $data,
+            //     'pengadaan' => $data,
+            // ]));
+        } catch (\Throwable $th) {
+
         }
     }
 }
