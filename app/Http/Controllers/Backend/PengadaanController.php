@@ -287,10 +287,10 @@ class PengadaanController extends Controller
 
 
             session()->flash('success', 'Berhasil update status verifikasi! ');
-            return redirect()->back();
+            return redirect()->route('pengadaan');
         } catch (\Throwable $th) {
             session()->flash('failed', $th->getMessage());
-            return redirect()->back();
+            return redirect()->route('pengadaan');
         }
     }
 

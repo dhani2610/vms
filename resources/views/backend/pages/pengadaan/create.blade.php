@@ -70,7 +70,7 @@
                                     <div class="form-group col-md-12">
                                         <label class="mt-2" for="upload_foto">Upload File</label>
                                         <input type="file" class="form-control dropify" id="upload" accept="application/pdf"
-                                            name="upload">
+                                            name="upload" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
