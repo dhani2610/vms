@@ -218,14 +218,45 @@
                                                 </div>
                                             </div>
                                         
-                                        <a class="btn btn-danger text-white" href="{{ route('admin.admins.destroy', $admin->id) }}"
+                                        {{-- <a class="btn btn-danger text-white" href="{{ route('admin.admins.destroy', $admin->id) }}"
                                         onclick="event.preventDefault(); document.getElementById('delete-form-{{ $admin->id }}').submit();">
                                         <i class="fa-solid fa-trash"></i>
                                         </a>
                                         <form id="delete-form-{{ $admin->id }}" action="{{ route('admin.admins.destroy', $admin->id) }}" method="POST" style="display: none;">
                                             @method('DELETE')
                                             @csrf
-                                        </form>
+                                        </form> --}}
+                                        <a class="btn btn-danger text-white" href="javascript:void(0);" onclick="confirmDelete('{{ route('admin.admins.delete', $admin->id) }}')">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                        
+                                        <script>
+                                            function confirmDelete(deleteUrl) {
+                                                const swalWithBootstrapButtons = Swal.mixin({
+                                                    customClass: {
+                                                        confirmButton: "btn btn-success",
+                                                        cancelButton: "btn btn-danger"
+                                                    },
+                                                    buttonsStyling: false
+                                                });
+                                        
+                                                swalWithBootstrapButtons.fire({
+                                                    title: "Are you sure you want to delete this data?",
+                                                    text: "This action cannot be undone!",
+                                                    icon: "warning",
+                                                    showCancelButton: true,
+                                                    confirmButtonText: "Yes, delete it!",
+                                                    cancelButtonText: "No, cancel!",
+                                                    reverseButtons: true
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        // Redirect to the delete URL
+                                                        window.location.href = deleteUrl;
+                                                    }
+                                                });
+                                            }
+                                        </script>
+                                        
                                     </td>
                                 </tr>
                                @endforeach

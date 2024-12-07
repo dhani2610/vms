@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('roles', 'Backend\RolesController', ['names' => 'admin.roles']);
     Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
     Route::resource('admins', 'Backend\AdminsController', ['names' => 'admin.admins']);
+    Route::get('/delete-admin/{id}', 'Backend\AdminsController@destroy')->name('admin.admins.delete');
 
     Route::post('/update-verifikasi/{id}', 'Backend\AdminsController@updateVerifikasi')->name('admins.update-verifikasi');
     Route::post('/reset-password/{id}', 'Backend\AdminsController@resetPassword')->name('admins.reset-password');

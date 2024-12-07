@@ -215,7 +215,7 @@ class AdminsController extends Controller
             $admin->delete();
         }
 
-        session()->flash('success', 'Admin has been deleted !!');
+        session()->flash('success', 'data has been deleted !!');
         return back();
     }
 }
